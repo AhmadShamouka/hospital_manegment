@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  BrowserRouter,
-  Routes,
-} from "react-router-dom";
-function Add_patient(props) {
+
+function Create_admin() {
   const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
@@ -21,34 +15,21 @@ function Add_patient(props) {
 
     try {
       const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/add_patients.php",
+        "http://localhost/hospital_manegment/backend/api/add_admin.php",
         formData
       );
+
       console.log(response.data);
     } catch (error) {
       console.error("Error during form submission:", error);
     }
   };
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="fname">First Name:</label>
-        <input
-          type="text"
-          name="fname"
-          id="fname"
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="lname">Last Name:</label>
-        <input
-          type="text"
-          name="lname"
-          id="lname"
-          onChange={handleChange}
-          required
-        />
+      <h2>Doctor Registration Form</h2>
 
+      <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
 
@@ -59,13 +40,11 @@ function Add_patient(props) {
           onChange={handleChange}
           required
         />
-        <label htmlFor="disease">Disease:</label>
-        <input type="text" name="disease" onChange={handleChange} required />
 
-        <input type="submit" value="Register" />
+        <button>Submit</button>
       </form>
     </div>
   );
 }
 
-export default Add_patient;
+export default Create_admin;

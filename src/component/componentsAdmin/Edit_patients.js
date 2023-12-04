@@ -52,15 +52,35 @@ function Edit_patients() {
       <h1>Edit User</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
-        <input name="fname" onChange={handleChange} required />
+        <input
+          name="fname"
+          defaultValue={inputs.fname}
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="lname">Last Name:</label>
-        <input name="lname" onChange={handleChange} required />
+        <input
+          name="lname"
+          defaultValue={inputs.lname}
+          onChange={handleChange}
+          required
+        />
 
         <label htmlFor="email">Email:</label>
-        <input type="email" name="email" onChange={handleChange} required />
-
+        <input
+          type="email"
+          name="email"
+          defaultValue={inputs.email}
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="disease">Disease:</label>
-        <input name="disease" onChange={handleChange} required />
+        <input
+          name="disease"
+          defaultValue={inputs.diesease}
+          onChange={handleChange}
+          required
+        />
 
         <input type="submit" value="Register" />
       </form>

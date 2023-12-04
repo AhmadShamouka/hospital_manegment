@@ -11,13 +11,12 @@ $data = json_decode($json_data, true);
 if (isset($data["email"], $data["password"])) {
     $email = $data["email"];
     $password = $data["password"];
-
-    $query = $mysqli->prepare("SELECT doctor_id, fname, email, password FROM doctors WHERE email = ?");
+    $query = $mysqli->prepare("SELECT admin_id, email, password FROM administrators WHERE email = ?");
     $query->bind_param('s', $email);
     $query->execute();
     $query->store_result();
     $num_row = $query->num_rows;
-    $query->bind_result($id, $name, $email, $hashed_password);
+    $query->bind_result($id, $email, $hashed_password);
     $query->fetch();
 
     $response = [];
@@ -27,12 +26,11 @@ if (isset($data["email"], $data["password"])) {
         $response['message'] = 'User not found';
     } else {
         if (password_verify($password, $hashed_password)) {
-            $response['status'] = 'success';
-            $response['user_id'] = $id;
-            $response['name'] = $name;
+            $response = 'success';
+          
         } else {
-            $response= 'error';
-            $response['message'] = 'Wrong inputs';
+            $response = 'error';
+          
         }
     }
 } else {

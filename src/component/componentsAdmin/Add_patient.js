@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  BrowserRouter,
-  Routes,
-} from "react-router-dom";
-function AddDoctor() {
+import { useNavigate } from "react-router-dom";
+function Add_patient(props) {
   const [formData, setFormData] = useState({});
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -21,20 +15,20 @@ function AddDoctor() {
 
     try {
       const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/add_doctor.php",
+        "http://localhost/hospital_manegment/backend/api/add_patients.php",
         formData
       );
+
       console.log(response.data);
+      navigate("/get_patients");
     } catch (error) {
       console.error("Error during form submission:", error);
     }
   };
-
   return (
     <div>
-      <h2>Doctor Registration Form</h2>
-
       <form onSubmit={handleSubmit}>
+        <h1>Patien Registration form</h1>
         <label htmlFor="fname">First Name:</label>
         <input
           type="text"
@@ -62,14 +56,13 @@ function AddDoctor() {
           onChange={handleChange}
           required
         />
+        <label htmlFor="disease">Disease:</label>
+        <input type="text" name="disease" onChange={handleChange} required />
 
-        <label htmlFor="expertise">Expertise:</label>
-        <input type="text" name="expertise" onChange={handleChange} required />
-
-        <button>Submit</button>
+        <input type="submit" value="Register" />
       </form>
     </div>
   );
 }
 
-export default AddDoctor;
+export default Add_patient;

@@ -14,7 +14,7 @@ function Signin_doctor(props) {
     e.preventDefault();
 
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         "http://localhost/hospital_manegment/backend/api/signin_doctor.php",
         formData
       );

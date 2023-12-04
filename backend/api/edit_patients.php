@@ -41,7 +41,20 @@ if (isset($path[5]) && is_numeric($path[5])) {
 
             $query->close();
             break;
+        case 'DELETE':
+            $json_data = file_get_contents("php://input");
+            $data = json_decode($json_data, true);
 
+            $query = $mysqli->prepare('DELETE From patients WHERE patient_id = ?');
+            $query->bind_param('i', $patient_id);
+            $query->execute();
+            $result = $query->get_result();
+
+            if ($query->execute()) {
+                echo json_encode(['message' => 'Patient data updated successfully']);
+            } else {
+                echo json_encode(['error' => 'Error updating patient data']);
+            }
         default:
             echo json_encode(['error' => 'Unsupported request method']);
             break;

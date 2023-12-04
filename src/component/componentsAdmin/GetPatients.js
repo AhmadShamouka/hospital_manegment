@@ -6,6 +6,7 @@ import {
   Link,
   BrowserRouter,
   Routes,
+  useParams,
 } from "react-router-dom";
 function GetPatients() {
   const [patients, setPatients] = useState([]);
@@ -22,6 +23,12 @@ function GetPatients() {
       .then(function (result) {
         setPatients(result.data);
       });
+  };
+  const deletePatient = (id) => {
+    axios.delete(
+      `http://localhost/hospital_manegment/backend/api/edit_patients.php/${id}`
+    );
+    getpatients();
   };
 
   return (
@@ -46,8 +53,10 @@ function GetPatients() {
               <td>{patient.email}</td>
               <td>{patient.disease}</td>
               <td>
-                <Link to={`${patient.patient_id}/edit_patients`}>Edit</Link>
-                <button>Delete</button>
+                <Link to={`/${patient.patient_id}/edit_patients`}>Edit</Link>
+                <button onClick={() => deletePatient(patient.patient_id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
