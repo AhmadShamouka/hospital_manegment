@@ -10,7 +10,5 @@ $db_name= 'hospital_management_system';
 $mysqli =new mysqli($host,$db_user,$db_pass,$db_name);
 if ($mysqli->connect_error) {
     die(''. $mysqli->connect_error);
-} else {
-    echo "success";
 }
 ?>
