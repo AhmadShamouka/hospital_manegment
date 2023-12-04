@@ -1,13 +1,31 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Link,
   BrowserRouter,
   Routes,
+  useParams,
 } from "react-router-dom";
-function Add_patient(props) {
+function Edit_patients() {
+  const [inputs, setInputs] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    getpatient();
+  }, []);
+
+  const getpatient = () => {
+    axios
+      .get(
+        `http://localhost/hospital_manegment/backend/api/edit_patients.php/${id}`
+      )
+      .then(function (result) {
+        console.log(result.data);
+        setInputs(result.data);
+      });
+  };
+
   const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
@@ -20,8 +38,8 @@ function Add_patient(props) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/add_patients.php",
+      const response = await axios.put(
+        `http://localhost/hospital_manegment/backend/api/edit_patients.php/${id}`,
         formData
       );
       console.log(response.data);
@@ -31,36 +49,18 @@ function Add_patient(props) {
   };
   return (
     <div>
+      <h1>Edit User</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
-        <input
-          type="text"
-          name="fname"
-          id="fname"
-          onChange={handleChange}
-          required
-        />
+        <input name="fname" onChange={handleChange} required />
         <label htmlFor="lname">Last Name:</label>
-        <input
-          type="text"
-          name="lname"
-          id="lname"
-          onChange={handleChange}
-          required
-        />
+        <input name="lname" onChange={handleChange} required />
 
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          onChange={handleChange}
-          required
-        />
         <label htmlFor="disease">Disease:</label>
-        <input type="text" name="disease" onChange={handleChange} required />
+        <input name="disease" onChange={handleChange} required />
 
         <input type="submit" value="Register" />
       </form>
@@ -68,4 +68,4 @@ function Add_patient(props) {
   );
 }
 
-export default Add_patient;
+export default Edit_patients;

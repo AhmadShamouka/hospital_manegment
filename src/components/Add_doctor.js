@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
 function AddDoctor() {
   const [formData, setFormData] = useState({});
 
@@ -10,14 +16,18 @@ function AddDoctor() {
     setFormData((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    axios.post(
-      "http://localhost/hospital_manegment/backend/api/add_doctor.php",
-      formData
-    );
-    console.log(formData);
+    try {
+      const response = await axios.post(
+        "http://localhost/hospital_manegment/backend/api/add_doctor.php",
+        formData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+    }
   };
 
   return (

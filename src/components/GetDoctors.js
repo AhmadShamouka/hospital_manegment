@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
 function GetDoctors() {
   const [doctors, setDoctors] = useState([]);
 

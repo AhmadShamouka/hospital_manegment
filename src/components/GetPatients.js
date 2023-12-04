@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
 function GetPatients() {
   const [patients, setPatients] = useState([]);
 
@@ -10,9 +16,10 @@ function GetPatients() {
 
   const getpatients = () => {
     axios
-      .post("http://localhost/hospital_manegment/backend/api/selectPatients.php")
+      .post(
+        "http://localhost/hospital_manegment/backend/api/selectPatients.php"
+      )
       .then(function (result) {
-      
         setPatients(result.data);
       });
   };
@@ -23,6 +30,7 @@ function GetPatients() {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -30,14 +38,19 @@ function GetPatients() {
           </tr>
         </thead>
         <tbody>
-            {patients.map((patient) => 
-               <tr key={patient.patient_id}>
-               <td>{patient.fname}</td>
-               <td>{patient.lname}</td>
-               <td>{patient.email}</td>
-               <td>{patient.Disease}</td>
-             </tr>
-            )} 
+          {patients.map((patient, key) => (
+            <tr key={key}>
+              <td>{patient.patient_id}</td>
+              <td>{patient.fname}</td>
+              <td>{patient.lname}</td>
+              <td>{patient.email}</td>
+              <td>{patient.disease}</td>
+              <td>
+                <Link to={`${patient.patient_id}/edit_patients`}>Edit</Link>
+                <button>Delete</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
@@ -45,4 +58,3 @@ function GetPatients() {
 }
 
 export default GetPatients;
-
