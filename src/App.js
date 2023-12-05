@@ -11,6 +11,7 @@ import Create_admin from "./component/componentsAdmin/Create_admin";
 import Admin from "./component/Admin";
 import Landing from "./component/componentLanding/Landing";
 import Edit_doctor from "./component/componentsAdmin/Edit_doctor";
+import Add_appointment from "./component/componentAppointment/Add_appointment";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <React.Fragment>
         <Router>
           <Routes>
+            <Route path="/appointment" element={<Add_appointment />} />
             <Route path="/" element={<Landing />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/add_doctor" element={<Add_doctor />} />

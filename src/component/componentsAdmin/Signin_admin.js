@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Jwt } from "jsonwebtoken";
+
 function Signin_admin(props) {
   const adminPass = "SEfatory";
   const navigate = useNavigate();
@@ -24,16 +24,6 @@ function Signin_admin(props) {
         "http://localhost/hospital_manegment/backend/api/signin_admin.php",
         formData
       );
-
-      // Assuming the server returns the token upon successful login
-      const token = response.data.token;
-
-      // Verify the token (optional step based on your requirements)
-      const decodedToken = jwt.verify(token, "");
-      console.log(decodedToken);
-
-      // Store the token in localStorage
-      localStorage.setItem("token", token);
 
       console.log(response.data);
 
