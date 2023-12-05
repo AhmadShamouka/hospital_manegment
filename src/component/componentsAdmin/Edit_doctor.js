@@ -9,18 +9,18 @@ import {
   useParams,
   useNavigate,
 } from "react-router-dom";
-function Edit_patients() {
+function Edit_doctor() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState([]);
   const { id } = useParams();
   useEffect(() => {
-    getpatient();
+    getdoctor();
   }, []);
 
-  const getpatient = () => {
+  const getdoctor = () => {
     axios
       .get(
-        `http://localhost/hospital_manegment/backend/api/edit_patients.php/${id}`
+        `http://localhost/hospital_manegment/backend/api/edit_doctor.php/${id}`
       )
       .then(function (result) {
         console.log(result.data);
@@ -41,18 +41,18 @@ function Edit_patients() {
 
     try {
       const response = await axios.put(
-        `http://localhost/hospital_manegment/backend/api/edit_patients.php/${id}`,
+        `http://localhost/hospital_manegment/backend/api/edit_doctor.php/${id}`,
         formData
       );
       console.log(response.data);
-      navigate("/get_patients");
+      navigate("/get_doctors");
     } catch (error) {
       console.error("Error during form submission:", error);
     }
   };
   return (
     <div>
-      <h1>Edit Patien</h1>
+      <h1>Edit Doctor</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
         <input
@@ -77,10 +77,10 @@ function Edit_patients() {
           onChange={handleChange}
           required
         />
-        <label htmlFor="disease">Disease:</label>
+        <label htmlFor="expertise">expertise:</label>
         <input
-          name="disease"
-          defaultValue={inputs.diesease}
+          name="expertise"
+          defaultValue={inputs.expertise}
           onChange={handleChange}
           required
         />
@@ -91,4 +91,4 @@ function Edit_patients() {
   );
 }
 
-export default Edit_patients;
+export default Edit_doctor;

@@ -27,8 +27,8 @@ function Add_patient(props) {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Patien Registration form</h1>
+      <h1>Patien Registration form:</h1>
+      <form className="formSignup" onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
         <input
           type="text"
@@ -59,7 +59,7 @@ function Add_patient(props) {
         <label htmlFor="disease">Disease:</label>
         <input type="text" name="disease" onChange={handleChange} required />
 
-        <input type="submit" value="Register" />
+        <button>Submit</button>
       </form>
     </div>
   );

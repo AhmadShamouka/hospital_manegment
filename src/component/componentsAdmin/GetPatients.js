@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./index.css";
 import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -42,6 +43,7 @@ function GetPatients() {
             <th>Last Name</th>
             <th>Email</th>
             <th>Disease</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -53,8 +55,16 @@ function GetPatients() {
               <td>{patient.email}</td>
               <td>{patient.disease}</td>
               <td>
-                <Link to={`/${patient.patient_id}/edit_patients`}>Edit</Link>
-                <button onClick={() => deletePatient(patient.patient_id)}>
+                <Link
+                  className="link"
+                  to={`/${patient.patient_id}/edit_patients`}
+                >
+                  Edit
+                </Link>
+                <button
+                  className="delete"
+                  onClick={() => deletePatient(patient.patient_id)}
+                >
                   Delete
                 </button>
               </td>

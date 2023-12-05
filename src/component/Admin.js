@@ -8,8 +8,6 @@ function Admin() {
   return (
     <div>
       <h2>Admin Panel</h2>
-
-      {/* Render all components */}
       <div>
         <Add_doctor />
         <Add_patient />

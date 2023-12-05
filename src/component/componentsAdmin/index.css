@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+table {
+  font-family: arial, sans-serif;
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+label {
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: large;
+}
+input {
+  margin: 0 10px 0 0;
+  text-align: left;
+  height: 30px;
+  width: 120px;
+}
+table thead th {
+  color: #ffffff;
+  background: #004976;
+  padding: 15px;
+  border: 1px solid #ebebec;
+  font-weight: 500;
+}
+
+table tr {
+  background: #ffffff;
+}
+
+table tr td {
+  border: 1px solid #e6edf1;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 640px) {
+  table thead {
+    display: none;
+  }
+
+  table tbody {
+    display: block;
+  }
+
+  table tbody tr td {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  table tbody tr {
+    margin-bottom: 20px;
+    display: block;
+    border: 1px solid #004976;
+    background: #f9f9f9;
+    overflow: hidden;
+  }
+
+  table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 30%;
+    display: flex;
+    background: #004976;
+    color: #fff;
+    padding: 15px;
+    margin-inline-end: 10px;
+  }
+}
+.link {
+  text-decoration: none;
+  margin: 5px;
+  background: #004976;
+  padding: 7px 15px;
+  color: #e6edf1;
+}
+.delete {
+  height: 30px;
+  width: 70px;
+  margin: 5px;
+  background: #760000;
+  padding: 5px 10px;
+  color: #e6edf1;
+}
+button {
+  background-color: #04aa6d;
+  border: none;
+  color: white;
+  height: 30px;
+  width: 70px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+h2 {
+  margin-top: 20%;
+  margin-bottom: 5%;
+  color: #e6edf1;
+  text-align: center;
+}

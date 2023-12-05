@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 function AddDoctor() {
   const [formData, setFormData] = useState({});
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -19,6 +19,7 @@ function AddDoctor() {
         formData
       );
       console.log(response.data);
+      navigate("/get_doctors");
     } catch (error) {
       console.error("Error during form submission:", error);
     }
@@ -26,9 +27,9 @@ function AddDoctor() {
 
   return (
     <div>
-      <h2>Doctor Registration Form</h2>
+      <h1>Doctor Registration Form:</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className="formSignup" onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
         <input
           type="text"
@@ -59,7 +60,6 @@ function AddDoctor() {
 
         <label htmlFor="expertise">Expertise:</label>
         <input type="text" name="expertise" onChange={handleChange} required />
-
         <button>Submit</button>
       </form>
     </div>
