@@ -75,6 +75,20 @@ function Edit_appointment() {
     getPatient();
   }, []);
 
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    const getRooms = () => {
+      axios
+        .post("http://localhost/hospital_manegment/backend/api/selectRooms.php")
+        .then(function (result) {
+          console.log(result.data);
+          setRooms(result.data);
+        });
+    };
+    getRooms();
+  }, []);
+
   return (
     <div>
       <h1>Edit appointment</h1>
@@ -123,13 +137,22 @@ function Edit_appointment() {
           required
         />
         <label htmlFor="room_id">Room ID:</label>
-        <input
-          type="number"
+        <select
+          id="room_id"
           name="room_id"
-          value={formData.room_id || ""}
+          value={formData.room_id}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="" disabled>
+            Select Doctor
+          </option>
+          {rooms.map((room) => (
+            <option key={room.room_id} value={room.room_id}>
+              {room.room_id}
+            </option>
+          ))}
+        </select>
 
         <button type="submit">Submit</button>
       </form>
