@@ -41,8 +41,10 @@ function GetPatients() {
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Number</th>
             <th>Email</th>
             <th>Disease</th>
+            <th>Room</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -52,8 +54,10 @@ function GetPatients() {
               <td>{patient.patient_id}</td>
               <td>{patient.fname}</td>
               <td>{patient.lname}</td>
+              <td>{patient.number}</td>
               <td>{patient.email}</td>
               <td>{patient.disease}</td>
+              <td>{patient.room_id}</td>
               <td>
                 <Link
                   className="link"

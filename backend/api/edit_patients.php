@@ -1,7 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: *');
+
 include('../connection.php');
 
 $path = explode('/', $_SERVER['REQUEST_URI']);
@@ -15,7 +13,6 @@ if (isset($path[5]) && is_numeric($path[5])) {
             $query->bind_param('i', $patient_id);
             $query->execute();
             $result = $query->get_result();
-
             if ($result->num_rows > 0) {
                 $patientData = $result->fetch_assoc();
                 echo json_encode($patientData);
@@ -30,8 +27,8 @@ if (isset($path[5]) && is_numeric($path[5])) {
             $json_data = file_get_contents("php://input");
             $data = json_decode($json_data, true);
 
-            $query = $mysqli->prepare('UPDATE patients SET fname=?, lname=?, email=?, disease=? WHERE patient_id = ?');
-            $query->bind_param("ssssi", $data['fname'], $data['lname'], $data['email'], $data['disease'], $patient_id);
+            $query = $mysqli->prepare('UPDATE patients SET fname=?, lname=?, email=?, disease=?, room_id=? WHERE patient_id = ?');
+            $query->bind_param("ssssii", $data['fname'], $data['lname'], $data['email'], $data['disease'], $data['room_id'], $patient_id);
 
             if ($query->execute()) {
                 echo json_encode(['message' => 'Patient data updated successfully']);

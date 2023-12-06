@@ -1,7 +1,7 @@
 <?php
 
 include('../connection.php');
-$query=$mysqli->prepare('select * FROM patients');
+$query=$mysqli->prepare('select * FROM appointments');
 $query->execute();
 $array=$query->get_result();
 $response=[];

@@ -10,7 +10,7 @@ if (isset($data["email"], $data["password"])) {
     $email = $data["email"];
     $password = $data["password"];
 
-    $query = $mysqli->prepare("SELECT doctor_id, fname, email, password FROM doctors WHERE email = ?");
+    $query = $mysqli->prepare("SELECT patient_id, fname, email, password FROM patients WHERE email = ?");
     $query->bind_param('s', $email);
     $query->execute();
     $query->store_result();
@@ -26,7 +26,7 @@ if (isset($data["email"], $data["password"])) {
     } else {
         if (password_verify($password, $hashed_password)) {
             $response['status'] = 'success';
-            $response['user_id'] = $id;
+            $response['patient_id'] = $id;
             $response['name'] = $name;
         } else {
             $response= 'error';

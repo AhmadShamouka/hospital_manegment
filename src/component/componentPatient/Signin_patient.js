@@ -18,14 +18,17 @@ function Signin_admin(props) {
 
     try {
       const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/signin_admin.php",
+        "http://localhost/hospital_manegment/backend/api/signin_patient.php",
         formData
       );
 
       console.log(response.data);
-
-      if (response.data == "success") {
-        navigate("/get_patients");
+      const id = response.data.patient_id;
+      // Check the properties of the response data
+      if (response.data.status === "success") {
+        navigate(`/${id}/patient`);
+      } else {
+        alert("User not found or wrong inputs");
       }
     } catch (error) {
       console.error("Error during form submission:", error);
@@ -34,7 +37,7 @@ function Signin_admin(props) {
 
   return (
     <div>
-      <h1>Admin SignIn Form</h1>
+      <h1>Patient SignIn Form</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />

@@ -1,7 +1,32 @@
 import React from "react";
-import "./index.css";
-import { Link } from "react-router-dom";
+import "../componentsAdmin/index.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 function Landing(props) {
+  const adminPass = "SEfactory";
+  const navigate = useNavigate();
+  const signinAdmin = () => {
+    const Input_pass = prompt("Enter Admin password");
+    if (Input_pass === adminPass) {
+      navigate("/create_admin");
+    } else {
+      alert("Wrong Pass");
+    }
+  };
+  const signUpAdmin = () => {
+    const Input_pass = prompt("Enter Admin password");
+    if (Input_pass === adminPass) {
+      navigate("/create_admin");
+    } else {
+      alert("Wrong Pass");
+    }
+  };
+
   return (
     <section>
       <div className="container">
@@ -14,7 +39,7 @@ function Landing(props) {
           </p>
         </div>
         <div className="button-wrapper">
-          <Link to="/add_doctor" className="btn outline">
+          <Link to="/signup_doctor" className="btn outline">
             SignUp
           </Link>
           <Link to={`/signin_doctor`} className="btn fill">
@@ -32,7 +57,7 @@ function Landing(props) {
           </p>
         </div>
         <div className="button-wrapper">
-          <Link to={`/add_patient`} className="btn outline">
+          <Link to={`/signup_patient`} className="btn outline">
             SignUp
           </Link>
           <Link to={`/signin_patient`} className="btn fill">
@@ -50,12 +75,12 @@ function Landing(props) {
           </p>
         </div>
         <div className="button-wrapper">
-          <Link to={`/create_admin`} className="btn outline">
+          <button class="btn outline" onClick={signUpAdmin}>
             SignUp
-          </Link>
-          <Link to={`/signin_admin`} className="btn fill">
+          </button>
+          <button className="btn fill" onClick={signinAdmin}>
             SignIn
-          </Link>
+          </button>
         </div>
       </div>
     </section>

@@ -1,18 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  BrowserRouter,
-  Routes,
-  useParams,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 function Edit_doctor() {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState([]);
   const { id } = useParams();
+  const [inputs, setInputs] = useState({});
+  const [formData, setFormData] = useState({});
+
   useEffect(() => {
     getdoctor();
   }, []);
@@ -25,15 +20,14 @@ function Edit_doctor() {
       .then(function (result) {
         console.log(result.data);
         setInputs(result.data);
+        setFormData(result.data); // Initialize formData with current values
       });
   };
-
-  const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData((values) => ({ ...values, [name]: value }));
+    setFormData((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
@@ -50,6 +44,7 @@ function Edit_doctor() {
       console.error("Error during form submission:", error);
     }
   };
+
   return (
     <div>
       <h1>Edit Doctor</h1>
@@ -57,14 +52,14 @@ function Edit_doctor() {
         <label htmlFor="fname">First Name:</label>
         <input
           name="fname"
-          defaultValue={inputs.fname}
+          value={formData.fname || ""}
           onChange={handleChange}
           required
         />
         <label htmlFor="lname">Last Name:</label>
         <input
           name="lname"
-          defaultValue={inputs.lname}
+          value={formData.lname || ""}
           onChange={handleChange}
           required
         />
@@ -73,19 +68,19 @@ function Edit_doctor() {
         <input
           type="email"
           name="email"
-          defaultValue={inputs.email}
+          value={formData.email || ""}
           onChange={handleChange}
           required
         />
-        <label htmlFor="expertise">expertise:</label>
+        <label htmlFor="expertise">Expertise:</label>
         <input
           name="expertise"
-          defaultValue={inputs.expertise}
+          value={formData.expertise || ""}
           onChange={handleChange}
           required
         />
 
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

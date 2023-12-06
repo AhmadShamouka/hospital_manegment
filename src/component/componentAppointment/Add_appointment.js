@@ -1,16 +1,28 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import "../componentsAdmin/index.css";
+import { useParams } from "react-router-dom";
 
 const Add_appointment = () => {
+  const { id } = useParams();
   const [formData, setFormData] = useState({
-    patientId: "",
-    doctorId: "",
+    patientId: id,
+    doctor_id: "",
     appointmentDate: "",
-    roomId: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost/hospital_manegment/backend/api/add_appointment.php",
+        formData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -24,27 +36,28 @@ const Add_appointment = () => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
+    const getDoctors = () => {
+      axios
+        .post(
+          "http://localhost/hospital_manegment/backend/api/selectDoctors.php"
+        )
+        .then(function (result) {
+          console.log(result.data);
+          setDoctors(result.data);
+        });
+    };
     getDoctors();
   }, []);
-
-  const getDoctors = () => {
-    axios
-      .post("http://localhost/hospital_manegment/backend/api/selectDoctors.php")
-      .then(function (result) {
-        console.log(result.data);
-        setDoctors(result.data);
-      });
-  };
 
   return (
     <div>
       <h2>Add Appointment</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="doctorId">Doctor:</label>
+        <label htmlFor="doctor_id">Doctor:</label>
         <select
-          id="doctorId"
-          name="doctorId"
-          value={doctors.doctorId}
+          id="doctor_id"
+          name="doctor_id"
+          value={formData.doctor_id}
           onChange={handleInputChange}
           required
         >
@@ -64,16 +77,6 @@ const Add_appointment = () => {
           id="appointmentDate"
           name="appointmentDate"
           value={formData.appointmentDate}
-          onChange={handleInputChange}
-          required
-        />
-
-        <label htmlFor="roomId">Room ID:</label>
-        <input
-          type="text"
-          id="roomId"
-          name="roomId"
-          value={formData.roomId}
           onChange={handleInputChange}
           required
         />

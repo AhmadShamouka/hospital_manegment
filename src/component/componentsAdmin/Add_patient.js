@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 function Add_patient(props) {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
@@ -45,7 +46,14 @@ function Add_patient(props) {
           onChange={handleChange}
           required
         />
-
+        <label htmlFor="number">Phone Number:</label>
+        <input
+          type="number"
+          name="number"
+          id="number"
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
 

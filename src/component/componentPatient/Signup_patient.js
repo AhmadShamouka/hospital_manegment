@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./index.css";
 import { useNavigate } from "react-router-dom";
-function AddDoctor() {
+import "../componentsAdmin/index.css";
+function Signup_patient(props) {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const handleChange = (event) => {
@@ -16,20 +16,20 @@ function AddDoctor() {
 
     try {
       const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/add_doctor.php",
+        "http://localhost/hospital_manegment/backend/api/add_patients.php",
         formData
       );
+
       console.log(response.data);
-      navigate("/get_doctors");
+      navigate("/signin_patient");
+      const success = true;
     } catch (error) {
       console.error("Error during form submission:", error);
     }
   };
-
   return (
     <div>
-      <h1>Doctor Registration Form:</h1>
-
+      <h1>Patien Registration form:</h1>
       <form className="formSignup" onSubmit={handleSubmit}>
         <label htmlFor="fname">First Name:</label>
         <input
@@ -47,7 +47,14 @@ function AddDoctor() {
           onChange={handleChange}
           required
         />
-
+        <label htmlFor="number">Phone Number:</label>
+        <input
+          type="number"
+          name="number"
+          id="number"
+          onChange={handleChange}
+          required
+        />
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
 
@@ -58,13 +65,13 @@ function AddDoctor() {
           onChange={handleChange}
           required
         />
+        <label htmlFor="disease">Disease:</label>
+        <input type="text" name="disease" onChange={handleChange} required />
 
-        <label htmlFor="expertise">Expertise:</label>
-        <input type="text" name="expertise" onChange={handleChange} required />
         <button>Submit</button>
       </form>
     </div>
   );
 }
 
-export default AddDoctor;
+export default Signup_patient;

@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import "../componentsAdmin/index.css";
+import { useParams, Link } from "react-router-dom";
 
-function Edit_patients() {
-  const navigate = useNavigate();
+function Patient() {
   const { id } = useParams();
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState([]);
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
@@ -38,7 +38,6 @@ function Edit_patients() {
         formData
       );
       console.log(response.data);
-      navigate("/get_patients");
     } catch (error) {
       console.error("Error during form submission:", error);
     }
@@ -51,14 +50,14 @@ function Edit_patients() {
         <label htmlFor="fname">First Name:</label>
         <input
           name="fname"
-          defaultValue={inputs.fname || ""}
+          defaultValue={inputs.fname}
           onChange={handleChange}
           required
         />
         <label htmlFor="lname">Last Name:</label>
         <input
           name="lname"
-          defaultValue={inputs.lname || ""}
+          defaultValue={inputs.lname}
           onChange={handleChange}
           required
         />
@@ -67,28 +66,28 @@ function Edit_patients() {
         <input
           type="email"
           name="email"
-          defaultValue={inputs.email || ""}
+          defaultValue={inputs.email}
           onChange={handleChange}
           required
         />
-        <label htmlFor="disease">Disease:</label>
+        <label htmlFor="number">Phone Number:</label>
         <input
-          name="disease"
-          defaultValue={inputs.diesease || ""}
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="room_id">Room:</label>
-        <input
-          name="room_id"
-          defaultValue={inputs.room_id || ""}
+          type="number"
+          name="number"
+          defaultValue={inputs.number}
           onChange={handleChange}
           required
         />
         <button type="submit">Submit</button>
       </form>
+      <Link
+        className="appointment-link"
+        to={`/${inputs.patient_id}/appointment`}
+      >
+        Go to Appointments
+      </Link>
     </div>
   );
 }
 
-export default Edit_patients;
+export default Patient;

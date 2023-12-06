@@ -7,7 +7,7 @@ import GetDoctors from "./componentsAdmin/GetDoctors";
 function Admin() {
   return (
     <div>
-      <h2>Admin Panel</h2>
+      <h1>Admin Panel</h1>
       <div>
         <Add_doctor />
         <Add_patient />

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "../componentsAdmin/index.css";
+import React, { useState } from "react";
 import axios from "axios";
+import "../componentsAdmin/index.css";
 import { useNavigate } from "react-router-dom";
-function Create_admin() {
+function Signup_doctor() {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const handleChange = (event) => {
@@ -16,12 +16,11 @@ function Create_admin() {
 
     try {
       const response = await axios.post(
-        "http://localhost/hospital_manegment/backend/api/add_admin.php",
+        "http://localhost/hospital_manegment/backend/api/add_doctor.php",
         formData
       );
-      navigate("/admin");
-
       console.log(response.data);
+      navigate("/signin_doctor");
     } catch (error) {
       console.error("Error during form submission:", error);
     }
@@ -29,9 +28,26 @@ function Create_admin() {
 
   return (
     <div>
-      <h1>Admin Registration Form</h1>
+      <h1>Doctor Registration Form:</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className="formSignup" onSubmit={handleSubmit}>
+        <label htmlFor="fname">First Name:</label>
+        <input
+          type="text"
+          name="fname"
+          id="fname"
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="lname">Last Name:</label>
+        <input
+          type="text"
+          name="lname"
+          id="lname"
+          onChange={handleChange}
+          required
+        />
+
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
 
@@ -43,9 +59,12 @@ function Create_admin() {
           required
         />
 
+        <label htmlFor="expertise">Expertise:</label>
+        <input type="text" name="expertise" onChange={handleChange} required />
         <button>Submit</button>
       </form>
     </div>
   );
 }
-export default Create_admin;
+
+export default Signup_doctor;

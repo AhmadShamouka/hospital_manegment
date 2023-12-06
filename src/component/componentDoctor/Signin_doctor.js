@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../componentsAdmin/index.css";
 function Signin_doctor(props) {
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +26,7 @@ function Signin_doctor(props) {
   };
   return (
     <div>
+      <h1>Doctor SignIn Form</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
         <input type="email" name="email" onChange={handleChange} required />
