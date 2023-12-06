@@ -7,36 +7,51 @@ import {
   BrowserRouter,
   Routes,
 } from "react-router-dom";
+
 function Get_appointments() {
-  const [appointments, setappointments] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     getappointments();
   }, []);
 
-  const getappointments = () => {
-    axios
-      .post("http://localhost/hospital_manegment/backend/api/appointment.php")
-      .then(function (result) {
-        setappointments(result.data);
-      });
+  const getappointments = async () => {
+    try {
+      const result = await axios.post(
+        "http://localhost/hospital_manegment/backend/api/appointment.php"
+      );
+      setAppointments(result.data);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    }
   };
 
-  const deleteappointment = (id) => {
-    axios.delete(
-      `http://localhost/hospital_manegment/backend/api/edit_appointment.php/${id}`
-    );
-    getappointments();
+  const deleteAppointment = async (id) => {
+    try {
+      await axios.delete(
+        `http://localhost/hospital_manegment/backend/api/edit_appointment.php/${id}`
+      );
+      getappointments();
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+    }
   };
+
+  const confirmDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this appointment?")) {
+      deleteAppointment(id);
+    }
+  };
+
   return (
     <div>
-      <h1>appointment List</h1>
+      <h1>Appointment List</h1>
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Patient_name</th>
-            <th>Doctor_name</th>
+            <th>Patient</th>
+            <th>Doctor</th>
             <th>Appointment_date</th>
             <th>Room_id</th>
             <th>Action</th>
@@ -59,7 +74,7 @@ function Get_appointments() {
                 </Link>
                 <button
                   className="delete"
-                  onClick={() => deleteappointment(appointment.appointment_id)}
+                  onClick={() => confirmDelete(appointment.appointment_id)}
                 >
                   Delete
                 </button>

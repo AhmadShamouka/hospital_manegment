@@ -17,6 +17,7 @@ import Signin_patient from "./component/componentPatient/Signin_patient";
 import Get_appointments from "./component/componentsAdmin/Get_appointments";
 import Patient from "./component/componentPatient/Patient";
 import Signup_doctor from "./component/componentDoctor/Signup_doctor";
+import Edit_appointment from "./component/componentsAdmin/Edit_appointment";
 
 function App() {
   return (
@@ -25,7 +26,10 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Landing />} />
-
+            <Route
+              path="/:id/edit_appointment"
+              element={<Edit_appointment />}
+            />
             <Route path="/get_appointments" element={<Get_appointments />} />
             <Route path="/:id/appointment" element={<Add_appointment />} />
 
